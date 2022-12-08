@@ -15,7 +15,7 @@ Mat src;
 //void drawHistogram(Mat& image);
 
 void drawHistogram(Mat& image) {
-    // ¶¨Òå²ÎÊı±äÁ¿
+    // å®šä¹‰å‚æ•°å˜é‡
     const int channels[1] = { 0 };
     const int bins[1] = { 256 };
     float hranges[2] = { 0,255 };
@@ -27,20 +27,20 @@ void drawHistogram(Mat& image) {
         Mat b_hist;
         Mat g_hist;
         Mat r_hist;
-        // ¼ÆËãBlue, Green, RedÍ¨µÀµÄÖ±·½Í¼
+        // è®¡ç®—Blue, Green, Redé€šé“çš„ç›´æ–¹å›¾
         calcHist(&bgr_plane[0], 1, 0, Mat(), b_hist, 1, bins, ranges);
         calcHist(&bgr_plane[1], 1, 0, Mat(), g_hist, 1, bins, ranges);
         calcHist(&bgr_plane[2], 1, 0, Mat(), r_hist, 1, bins, ranges);
-        // ÏÔÊ¾Ö±·½Í¼
+        // æ˜¾ç¤ºç›´æ–¹å›¾
         int hist_w = 512;
         int hist_h = 400;
         int bin_w = cvRound((double)hist_w / bins[0]);
         Mat histImage = Mat::zeros(hist_h, hist_w, CV_8UC3);
-        // ¹éÒ»»¯Ö±·½Í¼Êı¾İ
+        // å½’ä¸€åŒ–ç›´æ–¹å›¾æ•°æ®
         normalize(b_hist, b_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat());
         normalize(g_hist, g_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat());
         normalize(r_hist, r_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat());
-        // »æÖÆÖ±·½Í¼ÇúÏß
+        // ç»˜åˆ¶ç›´æ–¹å›¾æ›²çº¿
         for (int i = 1; i < bins[0]; i++) {
             line(histImage, Point(bin_w * (i - 1), hist_h - cvRound(b_hist.at<float>(i - 1))),
                 Point(bin_w * (i), hist_h - cvRound(b_hist.at<float>(i))), Scalar(255, 0, 0), 2, 8, 0);
@@ -50,37 +50,37 @@ void drawHistogram(Mat& image) {
                 Point(bin_w * (i), hist_h - cvRound(r_hist.at<float>(i))), Scalar(0, 0, 255), 2, 8, 0);
 
         }
-        // ÏÔÊ¾Ö±·½Í¼
-        namedWindow("Ö±·½Í¼", WINDOW_AUTOSIZE);
-        imshow("Ö±·½Í¼", histImage);
+        // æ˜¾ç¤ºç›´æ–¹å›¾
+        namedWindow("ç›´æ–¹å›¾", WINDOW_AUTOSIZE);
+        imshow("ç›´æ–¹å›¾", histImage);
     }
     else {
         Mat hist;
-        // ¼ÆËãBlue, Green, RedÍ¨µÀµÄÖ±·½Í¼
+        // è®¡ç®—Blue, Green, Redé€šé“çš„ç›´æ–¹å›¾
         calcHist(&image, 1, 0, Mat(), hist, 1, bins, ranges);
-        // ÏÔÊ¾Ö±·½Í¼
+        // æ˜¾ç¤ºç›´æ–¹å›¾
         int hist_w = 512;
         int hist_h = 400;
         int bin_w = cvRound((double)hist_w / bins[0]);
         Mat histImage = Mat::zeros(hist_h, hist_w, CV_8UC3);
-        // ¹éÒ»»¯Ö±·½Í¼Êı¾İ
+        // å½’ä¸€åŒ–ç›´æ–¹å›¾æ•°æ®
         normalize(hist, hist, 0, histImage.rows, NORM_MINMAX, -1, Mat());
-        // »æÖÆÖ±·½Í¼ÇúÏß
+        // ç»˜åˆ¶ç›´æ–¹å›¾æ›²çº¿
         for (int i = 1; i < bins[0]; i++) {
             line(histImage, Point(bin_w * (i - 1), hist_h - cvRound(hist.at<float>(i - 1))),
                 Point(bin_w * (i), hist_h - cvRound(hist.at<float>(i))), Scalar(0, 255, 0), 2, 8, 0);
         }
-        // ÏÔÊ¾Ö±·½Í¼
-        namedWindow("Ö±·½Í¼", WINDOW_AUTOSIZE);
-        imshow("Ö±·½Í¼", histImage);
+        // æ˜¾ç¤ºç›´æ–¹å›¾
+        namedWindow("ç›´æ–¹å›¾", WINDOW_AUTOSIZE);
+        imshow("ç›´æ–¹å›¾", histImage);
     }
 }
 
 void showHistogram() {
-    // ÈıÍ¨µÀ·ÖÀë
+    // ä¸‰é€šé“åˆ†ç¦»
     vector<Mat> bgr_plane;
     split(src, bgr_plane);
-    // ¶¨Òå²ÎÊı±äÁ¿
+    // å®šä¹‰å‚æ•°å˜é‡
     const int channels[1] = { 0 };
     const int bins[1] = { 256 };
     float hranges[2] = { 0,255 };
@@ -88,20 +88,20 @@ void showHistogram() {
     Mat b_hist;
     Mat g_hist;
     Mat r_hist;
-    // ¼ÆËãBlue, Green, RedÍ¨µÀµÄÖ±·½Í¼
+    // è®¡ç®—Blue, Green, Redé€šé“çš„ç›´æ–¹å›¾
     calcHist(&bgr_plane[0], 1, 0, Mat(), b_hist, 1, bins, ranges);
     calcHist(&bgr_plane[1], 1, 0, Mat(), g_hist, 1, bins, ranges);
     calcHist(&bgr_plane[2], 1, 0, Mat(), r_hist, 1, bins, ranges);
-    // ÏÔÊ¾Ö±·½Í¼
+    // æ˜¾ç¤ºç›´æ–¹å›¾
     int hist_w = 512;
     int hist_h = 400;
     int bin_w = cvRound((double)hist_w / bins[0]);
     Mat histImage = Mat::zeros(hist_h, hist_w, CV_8UC3);
-    // ¹éÒ»»¯Ö±·½Í¼Êı¾İ
+    // å½’ä¸€åŒ–ç›´æ–¹å›¾æ•°æ®
     normalize(b_hist, b_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat());
     normalize(g_hist, g_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat());
     normalize(r_hist, r_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat());
-    // »æÖÆÖ±·½Í¼ÇúÏß
+    // ç»˜åˆ¶ç›´æ–¹å›¾æ›²çº¿
     for (int i = 1; i < bins[0]; i++) {
         line(histImage, Point(bin_w * (i - 1), hist_h - cvRound(b_hist.at<float>(i - 1))),
             Point(bin_w * (i), hist_h - cvRound(b_hist.at<float>(i))), Scalar(255, 0, 0), 2, 8, 0);
@@ -110,45 +110,45 @@ void showHistogram() {
         line(histImage, Point(bin_w * (i - 1), hist_h - cvRound(r_hist.at<float>(i - 1))),
             Point(bin_w * (i), hist_h - cvRound(r_hist.at<float>(i))), Scalar(0, 0, 255), 2, 8, 0);
 
-        // ÏÔÊ¾Ö±·½Í¼
-        namedWindow("Ö±·½Í¼", WINDOW_AUTOSIZE);
-        imshow("Ö±·½Í¼", histImage);
+        // æ˜¾ç¤ºç›´æ–¹å›¾
+        namedWindow("ç›´æ–¹å›¾", WINDOW_AUTOSIZE);
+        imshow("ç›´æ–¹å›¾", histImage);
     }
 }
 
     int main()
     {
         Mat srcImage, dstImage;
-        srcImage = imread("C:/Users/ÀîÇ¬/Pictures/Saved Pictures/pro.jpg");
+        srcImage = imread("C:/Users/æä¹¾/Pictures/Saved Pictures/pro.jpg");
 
-        //ÅĞ¶ÏÍ¼ÏñÊÇ·ñ¼ÓÔØ³É¹¦
+        //åˆ¤æ–­å›¾åƒæ˜¯å¦åŠ è½½æˆåŠŸ
         if (!srcImage.data)
         {
-            cout << "Í¼Ïñ¼ÓÔØÊ§°Ü!" << endl;
+            cout << "å›¾åƒåŠ è½½å¤±è´¥!" << endl;
             return -1;
         }
         else
-            cout << "Í¼Ïñ¼ÓÔØ³É¹¦!" << endl << endl;
+            cout << "å›¾åƒåŠ è½½æˆåŠŸ!" << endl << endl;
 
-        cvtColor(srcImage, srcImage, COLOR_BGR2GRAY);       //½«Ô­Í¼Ïñ×ª»»Îª»Ò¶ÈÍ¼
+        cvtColor(srcImage, srcImage, COLOR_BGR2GRAY);       //å°†åŸå›¾åƒè½¬æ¢ä¸ºç°åº¦å›¾
 
-        equalizeHist(srcImage, dstImage);           //Ö±·½Í¼¾ùºâ»¯
+        equalizeHist(srcImage, dstImage);           //ç›´æ–¹å›¾å‡è¡¡åŒ–
 
-        //´´½¨´°¿Ú
-        String windowNameSrc = "§Ú§ã§ç§à§Õ§ß§à§Ö §Ú§Ù§à§Ò§â§Ñ§Ø§Ö§ß§Ú§ÖÔ­Í¼";
-        String windowNameHist = "¾ùºâ»¯ºóÍ¼Ïñ";
+        //åˆ›å»ºçª—å£
+        String windowNameSrc = "Ğ¸ÑÑ…Ğ¾Ğ´Ğ½Ğ¾Ğµ Ğ¸Ğ·Ğ¾Ğ±Ñ€Ğ°Ğ¶ĞµĞ½Ğ¸ĞµåŸå›¾";
+        String windowNameHist = "å‡è¡¡åŒ–åå›¾åƒ";
         namedWindow(windowNameSrc, WINDOW_AUTOSIZE);
         namedWindow(windowNameHist, WINDOW_AUTOSIZE);
 
-        //ÏÔÊ¾Í¼Ïñ
+        //æ˜¾ç¤ºå›¾åƒ
         imshow(windowNameSrc, srcImage);
         imshow(windowNameHist, dstImage);
 
         //waitKey(0);
 
 
-        Mat src = imread("C:/Users/ÀîÇ¬/Pictures/Saved Pictures/pro.jpg", IMREAD_GRAYSCALE);
-        //ÈôÏë´¦ÀíÔ´Í¼£¬É¾µôÕâÀïµÄIMREAD_GRAYSCALE
+        Mat src = imread("C:/Users/æä¹¾/Pictures/Saved Pictures/pro.jpg", IMREAD_GRAYSCALE);
+        //è‹¥æƒ³å¤„ç†æºå›¾ï¼Œåˆ æ‰è¿™é‡Œçš„IMREAD_GRAYSCALE
 
        // namedWindow(winTitle, WINDOW_AUTOSIZE);
      //namedWindow(win, WINDOW_AUTOSIZE);
